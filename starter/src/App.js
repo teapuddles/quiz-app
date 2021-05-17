@@ -40,6 +40,14 @@ export default function App() {
 		},
 	];
 
+
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+	
+
+	const handleAnswerButtonClick = () => {
+		const nextQuestion = currentQuestion + 1
+
+	}
 	return (
 		<div className='app'>
 			{/* HINT: replace "false" with logic to display the 
@@ -52,10 +60,20 @@ export default function App() {
 						<div className='question-count'>
 							<span>Question 1</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[0].questionText}</div>
+						{/* in challenge will have to import the questions array.
+						Also, the structure of the answers is different, too. 
+						
+						currentQuestion comes from state and makes our questions/answers
+						more dynamic. */}
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-						{questions[0].answerOptions.map((answerOption) => <button>{answerOption.answerText}</button>)}
+						{/* mapping answers to the answer-section by answerText */}
+						{questions[currentQuestion].answerOptions.map((answerOption) => 
+						// when a question is answered you go to the next question /w handleAnswerButtonClicked
+						// This is different from my new assingment. 
+							<button onClick={handleAnswerButtonClick}>{answerOption.answerText}</button>
+							)}
 					</div>
 				</>
 			)}
