@@ -1,63 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+
+import Summary from './components/Summary'
+import { questions } from './quizzes/questions.js'
+
 
 export default function App() {
 	// here we will, in our challenge, take all of the incorrect and 
 	// correct answers and combine them into a new array of questions.
 	// to be randomly mapped in the quiz component 
 
-	const questions = [
-		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
-			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
-			],
-		},
-	];
-
+	const [allAnswers, setAllAnswers] = useState([])
+	// using this empty array, we'll combine both our correct + incorrect answers
+	// we'll compare what was clicked to correctOptions.answerText 
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	// sets state to false so we can flip it with a click
-	const [showScore, setShowScore] = useState(false);
-	
+	const [showSummary, setShowSummary] = useState(false);
+	const [score, setScore] = useState(0);
 
-	const handleAnswerButtonClick = () => {
+
+	useEffect(() => {
+		return console.log(questions[currentQuestion].correctOptions, questions[currentQuestion].incorrectOptions)
+	},[currentQuestion])
+
+
+
+	const handleAnswerButtonClick = (isCorrect) => {
+		if(isCorrect === true){
+			setScore(score + 1)
+		}
+		// This logic for moving to the next question will 
+		// likely need to be in a separate function in test. 
 		const nextQuestion = currentQuestion + 1
 		setCurrentQuestion(nextQuestion)
 		// this will break without this
 		if(nextQuestion < questions.length){
 			setCurrentQuestion(nextQuestion)
+			// call answer randomizer? 
 		}else{
-			setShowScore(true)
+			setShowSummary(true)
 		}
 	}
 
@@ -67,13 +49,13 @@ export default function App() {
       score when the user has answered all the questions */}
 
 	  {/* this terary below is going to be what renders our score component */}
-			{false ? (
-				<div className='score-section'>You scored 1 out of {questions.length}</div>
+			{showSummary ? (
+				<Summary />
 			) : (
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question 1</span>/{questions.length}
+							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
 						{/* in challenge will have to import the questions array.
 						Also, the structure of the answers is different, too. 
@@ -82,16 +64,22 @@ export default function App() {
 						more dynamic. */}
 						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
-					<div className='answer-section'>
-						{/* mapping answers to the answer-section by answerText */}
-						{questions[currentQuestion].answerOptions.map((answerOption) => 
-						// when a question is answered you go to the next question /w handleAnswerButtonClicked
-						// This is different from my new assingment. 
-							<button onClick={handleAnswerButtonClick}>{answerOption.answerText}</button>
-							)}
-					</div>
+					{/* RETURN CODE HERE */}
 				</>
 			)}
 		</div>
 	);
 }
+
+
+// {/* <div className='answer-section'>
+// 						{/* mapping answers to the answer-section by answerText */}
+// 						{questions[currentQuestion].answerOptions.map((answerOption) => 
+// 						// when a question is answered you go to the next question /w handleAnswerButtonClicked
+// 						// This is different from my new assingment. 
+// 							<button onClick={() => handleAnswerButtonClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+// 							)}
+// 					</div> */}
+
+// TO DO 
+// Button that resets particular quiz.
