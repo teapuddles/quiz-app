@@ -20,10 +20,19 @@ export default function App() {
 	const [score, setScore] = useState(0);
 
 
-	useEffect(() => {
-		return console.log(questions[currentQuestion].correctOptions, questions[currentQuestion].incorrectOptions)
-	},[currentQuestion])
+	const combineAllAnswers = () => {
+		const correct = questions[currentQuestion].correctOptions
+		const incorrect = questions[currentQuestion].incorrectOptions
 
+		const correctAndIncorrect = correct.concat(incorrect) 
+
+		setAllAnswers([...allAnswers, correctAndIncorrect])
+		console.log(allAnswers)
+	}
+
+	useEffect(() => {
+		combineAllAnswers()
+	},[combineAllAnswers])
 
 
 	const handleAnswerButtonClick = (isCorrect) => {
