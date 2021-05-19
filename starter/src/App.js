@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 export default function App() {
+	// here we will, in our challenge, take all of the incorrect and 
+	// correct answers and combine them into a new array of questions.
+	// to be randomly mapped in the quiz component 
+
 	const questions = [
 		{
 			questionText: 'What is the capital of France?',
@@ -42,16 +46,27 @@ export default function App() {
 
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
+	// sets state to false so we can flip it with a click
+	const [showScore, setShowScore] = useState(false);
 	
 
 	const handleAnswerButtonClick = () => {
 		const nextQuestion = currentQuestion + 1
-
+		setCurrentQuestion(nextQuestion)
+		// this will break without this
+		if(nextQuestion < questions.length){
+			setCurrentQuestion(nextQuestion)
+		}else{
+			setShowScore(true)
+		}
 	}
+
 	return (
 		<div className='app'>
 			{/* HINT: replace "false" with logic to display the 
       score when the user has answered all the questions */}
+
+	  {/* this terary below is going to be what renders our score component */}
 			{false ? (
 				<div className='score-section'>You scored 1 out of {questions.length}</div>
 			) : (
