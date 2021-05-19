@@ -2,46 +2,42 @@ export const questions = [
 
     {
         questionText: 'What is the capital of France?',
-        correctOptions: [
-            { answerText: 'Paris'},
-        ],
+        correctOption: 'Paris',
+
         incorrectOptions:[
-            { answerText: 'New York' },
-            { answerText: 'London' },
-            { answerText: 'Dublin' }
+             'New York',
+             'London',
+             'Dublin' 
         ]
-    },
+    },   
     {
         questionText: 'Who is CEO of Tesla?',
-        correctOptions: [
-            { answerText: 'Elon Musk'},
-        ],
+        correctOption: 'Elon Musk', 
+
         incorrectOptions: [
-            { answerText: 'Jeff Bezos' },
-            { answerText: 'Bill Gates' },
-            { answerText: 'Tony Stark' },
+             'Jeff Bezos',
+             'Bill Gates',
+             'Tony Stark',
         ]
     },
     {
         questionText: 'The iPhone was created by which company?',
-        correctOptions: [
-            { answerText: 'Apple'},
-        ],
+        correctOption: 'Apple',
+
         incorrectOptions: [
-            { answerText: 'Intel' },
-            { answerText: 'Amazon' },
-            { answerText: 'Microsoft' },
+             'Intel',
+             'Amazon',
+             'Microsoft',
         ],
     },
     {
         questionText: 'How many Harry Potter books are there?',
-        correctOptions: [
-            { answerText: '7'}
-        ],
+        correctOption: '7',
+
         incorrectOptions: [
-            { answerText: '1' },
-            { answerText: '4' },
-            { answerText: '6' }
+             '1',
+             '4',
+             '6'
         ]
     },
 ];
